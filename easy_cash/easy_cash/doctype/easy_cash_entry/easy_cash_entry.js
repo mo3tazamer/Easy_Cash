@@ -103,6 +103,17 @@ frappe.ui.form.on("Easy Cash Entry", {
                 });
             });
         }
+        if (!frm.is_new() && !frm.doc.__islocal) {
+            frm.add_custom_button(__("New Payment"), function () {
+                frappe.new_doc("Easy Cash Entry", {
+                    company: frm.doc.company,
+                    treasury: frm.doc.treasury,
+                    entry_type: frm.doc.entry_type,
+                    party_type: frm.doc.party_type,
+                    party: frm.doc.party,
+                });
+            }).addClass("btn-primary");
+        }
     },
 });
 
