@@ -24,25 +24,6 @@ class EasyCashEntry(AccountsController):
 		self.validate_treasury()
 		self.validate_currency_is_company_currency()
 		self.validate_category_currencies()
-		self.validate_party_account()
-
-	def validate_party_account(self):
-		if self.party:
-			accounts = list(set(row.account for row in self.category_lines if row.account))
-			if not accounts:
-				return
-			account_root_types = frappe.db.get_values(
-				"Account",
-				filters={"name": ["in", accounts]},
-				fieldname=["name", "root_type"],
-				as_dict=True,
-			)
-			for acc in account_root_types:
-				if acc.root_type not in ["Receivable", "Payable"]:
-					frappe.throw(
-						_("Party Type and Party can only be set for Receivable / Payable account"),
-						title=_("Invalid Account Type"),
-					)
 
 	def validate_cash_account(self):
 		if not self.cash_account:
