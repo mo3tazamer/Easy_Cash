@@ -10,6 +10,13 @@ frappe.ui.form.on("Easy Cash Entry", {
                 },
             };
         });
+        frm.set_query("party_type", function () {
+            return {
+                filters: {
+                    name: ["in", ["Customer", "Supplier"]],
+                },
+            };
+        });
         frm.set_query("project", "category_lines", function () {
             return {
                 filters: {
@@ -18,6 +25,12 @@ frappe.ui.form.on("Easy Cash Entry", {
             };
         });
         erpnext.accounts.dimensions.setup_dimension_filters(frm, frm.doctype);
+    },
+
+    onload: function (frm) {
+        if (frm.is_new()) {
+            frm.trigger("entry_type");
+        }
     },
 
     company: function (frm) {
@@ -43,6 +56,12 @@ frappe.ui.form.on("Easy Cash Entry", {
     },
 
     entry_type: function (frm) {
+        if (frm.doc.entry_type === "Cash In") {
+            frm.set_value("party_type", "Customer");
+        } else if (frm.doc.entry_type === "Cash Out") {
+            frm.set_value("party_type", "Supplier");
+        }
+        frm.set_value("party", "");
         frm.trigger("set_category_filters");
         frm.set_value("total_amount", 0);
         frm.doc.category_lines = [];
