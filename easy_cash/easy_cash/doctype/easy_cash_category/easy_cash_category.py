@@ -53,13 +53,13 @@ class EasyCashCategory(Document):
 
 	def validate_account_root_type(self):
 		root_type = frappe.db.get_value("Account", self.account, "root_type")
-		if self.type == "Cash In" and root_type != "Income":
+		if self.type == "Cash In" and root_type not in ("Income", "Receivable", "Asset"):
 			frappe.throw(
-				_("Cash In categories must use an Income account"),
+				_("Cash In categories must use an Income, Receivable, or Asset account"),
 				title=_("Invalid Account Type"),
 			)
-		if self.type == "Cash Out" and root_type not in ("Expense", "Asset"):
+		if self.type == "Cash Out" and root_type not in ("Expense", "Asset", "Payable", "Liability"):
 			frappe.throw(
-				_("Cash Out categories must use an Expense or Asset account"),
+				_("Cash Out categories must use an Expense, Asset, Payable, or Liability account"),
 				title=_("Invalid Account Type"),
 			)
