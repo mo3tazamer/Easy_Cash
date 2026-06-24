@@ -49,3 +49,4 @@
 "Multi-currency entries are not supported yet.","المعاملات متعددة العملات غير مدعومة بعد."
 "Entry currency ({0}) must match company currency ({1}).","عملة المعاملة ({0}) يجب أن تتطابق مع عملة الشركة ({1})."
 "Row {0}: Account {1} currency ({2}) does not match entry currency ({3})","الصف {0}: عملة الحساب {1} ({2}) لا تتطابق مع عملة المعاملة ({3})"
+"Party Type and Party can only be set for Receivable / Payable account","نوع الطرف والطرف يمكن إضافتهم فقط لحساب مدينة أو دائن"
