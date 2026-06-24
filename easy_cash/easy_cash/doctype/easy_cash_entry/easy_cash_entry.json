@@ -16,6 +16,8 @@
   "cash_account",
   "currency",
   "conversion_rate",
+  "party_type",
+  "party",
   "section_lines",
   "category_lines",
   "total_amount",
@@ -122,6 +124,21 @@
    "hidden": 1,
    "label": "Conversion Rate",
    "read_only": 1
+  },
+  {
+   "fieldname": "party_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Party Type",
+   "options": "DocType",
+   "get_query": "frappe.contacts.address_and_contact.filter_dynamic_link_doctypes"
+  },
+  {
+   "fieldname": "party",
+   "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "label": "Party",
+   "options": "party_type"
   },
   {
    "fieldname": "section_remarks",

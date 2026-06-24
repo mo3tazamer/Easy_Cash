@@ -172,6 +172,10 @@ class EasyCashEntry(AccountsController):
 							"debit": row.amount,
 							"credit": 0,
 							"against": self.cash_account,
+							"against_voucher_type": self.doctype,
+							"against_voucher": self.name,
+							"party_type": self.party_type,
+							"party": self.party,
 							"cost_center": row.cost_center,
 							"remarks": remarks,
 						},
@@ -186,6 +190,10 @@ class EasyCashEntry(AccountsController):
 							"debit": 0,
 							"credit": row.amount,
 							"against": self.cash_account,
+							"against_voucher_type": self.doctype,
+							"against_voucher": self.name,
+							"party_type": self.party_type,
+							"party": self.party,
 							"cost_center": row.cost_center,
 							"remarks": remarks,
 						},
@@ -203,6 +211,8 @@ class EasyCashEntry(AccountsController):
 						"debit": 0,
 						"credit": self.total_amount,
 						"against": against_accounts,
+						"party_type": self.party_type,
+						"party": self.party,
 					}
 				)
 			)
@@ -214,6 +224,8 @@ class EasyCashEntry(AccountsController):
 						"debit": self.total_amount,
 						"credit": 0,
 						"against": against_accounts,
+						"party_type": self.party_type,
+						"party": self.party,
 					}
 				)
 			)
